@@ -14,7 +14,7 @@ namespace LibraryWeb.Controllers
         public IActionResult Index()
         {
             List<Category> categoryList = _db.Categories.ToList();
-            return View();
+            return View(categoryList);
         }
     }
 }
