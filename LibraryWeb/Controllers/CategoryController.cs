@@ -24,6 +24,11 @@ namespace LibraryWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
+            //if(obj.Name == obj.DisplayOrder.ToString())
+            //{
+            //    ModelState.AddModelError("DisplayOrder", "The Display Order field cannot exactly match the Order Name.");
+            //}
+
             if (ModelState.IsValid)
             {
                 _db.Categories.Add(obj);
