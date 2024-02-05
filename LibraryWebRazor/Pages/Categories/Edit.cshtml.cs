@@ -30,6 +30,8 @@ namespace LibraryWebRazor.Pages.Categories
             {
                 _db.Update(Category);
                 _db.SaveChanges();
+                TempData["success"] = "Category updated successfully!";
+
                 return RedirectToPage("Index");
             }
 
