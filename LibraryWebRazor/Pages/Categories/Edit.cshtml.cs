@@ -26,10 +26,14 @@ namespace LibraryWebRazor.Pages.Categories
 
         public IActionResult OnPost()
         {
-            _db.Update(Category);
-            _db.SaveChanges();
+            if(ModelState.IsValid)
+            {
+                _db.Update(Category);
+                _db.SaveChanges();
+                return RedirectToPage("Index");
+            }
 
-            return RedirectToPage("Index");
+            return Page();
         }
     }
 }
