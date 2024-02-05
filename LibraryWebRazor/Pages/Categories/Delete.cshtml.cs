@@ -14,14 +14,13 @@ namespace LibraryWebRazor.Pages.Categories
         {
             _db = db;
         }
-        public void OnGet(int id)
+        public void OnGet(int? id)
         {
-            Category = _db.Categories.FirstOrDefault(c => c.Id == id);
+            if(id != null && id != 0)
+            {
+                Category = _db.Categories.FirstOrDefault(c => c.Id == id);
 
-            //if (Category == null)
-            //{
-            //    return NotFound();
-            //}
+            }
         }
 
         public IActionResult OnPost()
