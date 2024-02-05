@@ -8,6 +8,7 @@ namespace LibraryWebRazor.Pages.Categories
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _db;
+        [BindProperty]
         public Category Category { get; set; }
         public CreateModel(ApplicationDbContext db)
         {
@@ -16,6 +17,14 @@ namespace LibraryWebRazor.Pages.Categories
 
         public void OnGet()
         {
+        }
+
+        public IActionResult OnPost()
+        {
+            _db.Categories.Add(Category);
+            _db.SaveChanges();
+
+            return RedirectToPage("Index");
         }
     }
 }
