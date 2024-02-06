@@ -1,4 +1,5 @@
 ﻿using LibraryWeb.DataAccess.Data;
+using LibraryWeb.DataAccess.Repository.IRepository;
 using LibraryWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,14 +7,14 @@ namespace LibraryWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly ICategoryRepository _categoryRepository;
+        public CategoryController(ICategoryRepository categoryRepository)
         {
-            _db = db;
+            _categoryRepository = categoryRepository;
         }
         public IActionResult Index()
         {
-            List<Category> categoryList = _db.Categories.ToList();
+            List<Category> categoryList = _categoryRepository.GetAll().ToList();
             return View(categoryList);
         }
 
@@ -31,8 +32,8 @@ namespace LibraryWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                _categoryRepository.Add(obj);
+                _categoryRepository.Save();
                 TempData["success"] = "Category created successfully!";
                 return RedirectToAction("Index");
             }
@@ -47,9 +48,9 @@ namespace LibraryWeb.Controllers
                 return NotFound();
             }
 
-            var category = _db.Categories.FirstOrDefault(c => c.Id == id);
-            //var category = _db.Categories.Find(id);
-            //var category = _db.Categories.Where(c => c.Id == id).FirstOrDefault();
+            var category = _categoryRepository.Get(c => c.Id == id);
+            //var category = _categoryRepository.Find(id);
+            //var category = _categoryRepository.Where(c => c.Id == id).FirstOrDefault();
             if (category == null)
             {
                 return NotFound();
@@ -62,8 +63,8 @@ namespace LibraryWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _categoryRepository.Update(obj);
+                _categoryRepository.Save();
                 TempData["success"] = "Category updated successfully!";
                 return RedirectToAction("Index");
             }
@@ -78,9 +79,9 @@ namespace LibraryWeb.Controllers
                 return NotFound();
             }
 
-            var category = _db.Categories.FirstOrDefault(c => c.Id == id);
-            //var category = _db.Categories.Find(id);
-            //var category = _db.Categories.Where(c => c.Id == id).FirstOrDefault();
+            var category = _categoryRepository.Get(c => c.Id == id);
+            //var category = _categoryRepository.Find(id);
+            //var category = _categoryRepository.Where(c => c.Id == id).FirstOrDefault();
             if (category == null)
             {
                 return NotFound();
@@ -91,14 +92,14 @@ namespace LibraryWeb.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            var category = _db.Categories.FirstOrDefault(c => c.Id == id);
+            var category = _categoryRepository.Get(c => c.Id == id);
             if (category == null)
             {
                 return NotFound();
             }
 
-            _db.Categories.Remove(category);
-            _db.SaveChanges();
+            _categoryRepository.Remove(category);
+            _categoryRepository.Save();
             TempData["success"] = "Category deleted successfully!";
             return RedirectToAction("Index");
         }
