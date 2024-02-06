@@ -1,4 +1,4 @@
-using LibraryWeb.Data;
+using LibraryWeb.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
