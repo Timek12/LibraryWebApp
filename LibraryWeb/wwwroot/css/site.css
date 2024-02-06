@@ -8,7 +8,6 @@ a.navbar-brand {
 }
 
 
-
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;
@@ -75,7 +74,7 @@ html {
 }
 
 .bg-secondary {
-    background-color: #3A595C !important;
+    background-color: #404040 !important;
 }
 
 bg-success {
@@ -228,7 +227,7 @@ bg-success {
 
 .btn-primary {
     color: #fff;
-    background-color: #202020);
+    background-color: #202020;
 }
 
 
