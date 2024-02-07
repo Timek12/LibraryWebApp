@@ -22,15 +22,11 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>
-                        Title
-                    </th>
-                    <th>
-                        Author
-                    </th>
-                    <th>
-                        Price
-                    </th>
+                    <th>Title</th>
+                    <th>ISBN</th>
+                    <th>Price</th>
+                    <th>Author</th>
+                    <th>Category</th>
                     <th></th>
                 </tr>
             </thead>
@@ -40,8 +36,10 @@
                 {
                     <tr>
                         <td>@obj.Title</td>
-                        <td>@obj.Author</td>
+                        <td>@obj.ISBN</td>
                         <td>@obj.ListPrice</td>
+                        <td>@obj.Author</td>
+                        <td></td>
                         <td>
                             <div class="w-75 btn-group" role="group">
                                 <a asp-controller="Product" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
