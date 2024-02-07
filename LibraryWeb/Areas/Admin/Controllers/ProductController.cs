@@ -59,5 +59,26 @@ namespace LibraryWeb.Areas.Admin.Controllers
             return View(obj);
         }
 
+        public IActionResult Delete(int id)
+        {
+            Product obj = _unitOfWork.Product.Get(p => p.Id == id);
+            return View(obj);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int id)
+        {
+            var product = _unitOfWork.Product.Get(p => p.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _unitOfWork.Product.Remove(product);
+            _unitOfWork.Save();
+            TempData["success"] = "Product deleted successfully!";
+            return RedirectToAction("Index");
+        }
+
     }
 }
