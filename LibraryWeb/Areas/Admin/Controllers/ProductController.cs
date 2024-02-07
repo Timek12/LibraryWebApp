@@ -39,5 +39,25 @@ namespace LibraryWeb.Areas.Admin.Controllers
             return View(obj);
         }
 
+        public IActionResult Edit(int id)
+        {
+            Product obj = _unitOfWork.Product.Get(p => p.Id == id);
+            return View(obj);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Product.Update(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Product updated successfully!";
+                return RedirectToAction("Index");
+            }
+
+            return View(obj);
+        }
+
     }
 }
