@@ -20,7 +20,24 @@ namespace LibraryWeb.Areas.Admin.Controllers
             return View(productsList);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult Create(Product obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Product created successfully!";
+                return RedirectToAction("Index");
+            }
+
+            return View(obj);
+        }
 
     }
 }
