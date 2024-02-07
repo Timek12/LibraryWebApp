@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryWeb.DataAccess.Repository.IRepository
 {
-    public interface IProductRepository
+    public interface IProductRepository : IRepository<Product>
     {
         void Update(Product product);
     }
