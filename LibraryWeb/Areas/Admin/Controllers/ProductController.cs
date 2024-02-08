@@ -110,7 +110,7 @@ namespace LibraryWeb.Areas.Admin.Controllers
             List<Product> ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = ProductList });
         }
-
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
             Product productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
