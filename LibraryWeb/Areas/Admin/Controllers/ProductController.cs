@@ -22,7 +22,7 @@ namespace LibraryWeb.Areas.Admin.Controllers
             return View(ProductList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
             //ViewBag.CategoryList = CategoryList;
             //ViewData["CategoryList"] = CategoryList;
@@ -35,11 +35,18 @@ namespace LibraryWeb.Areas.Admin.Controllers
                 }),
                 Product = new Product()
             };
+            
+            if(id != null && id != 0) 
+            {
+                // edit funcitonality
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+            }
+
             return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Create(ProductVM productVM)
+        public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
@@ -58,26 +65,6 @@ namespace LibraryWeb.Areas.Admin.Controllers
 
                 return View(productVM);
             }
-        }
-
-        public IActionResult Edit(int id)
-        {
-            Product obj = _unitOfWork.Product.Get(p => p.Id == id);
-            return View(obj);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Product updated successfully!";
-                return RedirectToAction("Index");
-            }
-
-            return View(obj);
         }
 
         public IActionResult Delete(int id)
