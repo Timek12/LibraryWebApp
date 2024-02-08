@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace LibraryWeb.Models
 {
@@ -53,8 +54,9 @@ namespace LibraryWeb.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         [Display(Name = "Category")]
+        [ValidateNever]
         public Category Category { get; set; }
-
+        [ValidateNever]
         public string ImageUrl { get; set; }
     }
 }
