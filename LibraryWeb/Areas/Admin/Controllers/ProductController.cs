@@ -1,6 +1,7 @@
 ﻿using LibraryWeb.DataAccess.Repository.IRepository;
 using LibraryWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Identity.Client;
 
 namespace LibraryWeb.Areas.Admin.Controllers
@@ -16,8 +17,13 @@ namespace LibraryWeb.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            List<Product> productsList = _unitOfWork.Product.GetAll().ToList();
-            return View(productsList);
+            List<Product> ProductList = _unitOfWork.Product.GetAll().ToList();
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            }) ;
+            return View(ProductList);
         }
 
         public IActionResult Create()
