@@ -21,7 +21,7 @@ namespace LibraryWeb.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            List<Product> ProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> ProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
             return View(ProductList);
         }
 
