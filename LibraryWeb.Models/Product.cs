@@ -52,6 +52,7 @@ namespace LibraryWeb.Models
 
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
+        [Display(Name = "Category")]
         public Category Category { get; set; }
 
         public string ImageUrl { get; set; }
