@@ -22,6 +22,12 @@ namespace LibraryWeb.Areas.Customer.Controllers
             return View(productList);
         }
 
+        public IActionResult Details(int id)
+        {
+            Product product = _unitOfWork.Product.Get(p => p.Id == id);
+            return View(product);
+        }
+
         public IActionResult Privacy()
         {
             return View();
