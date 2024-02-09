@@ -24,7 +24,7 @@ namespace LibraryWeb.Areas.Customer.Controllers
 
         public IActionResult Details(int id)
         {
-            Product product = _unitOfWork.Product.Get(p => p.Id == id);
+            Product product = _unitOfWork.Product.Get(p => p.Id == id, includeProperties: "Category");
             return View(product);
         }
 
