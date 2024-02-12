@@ -5,10 +5,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Identity.Client;
 using LibraryWeb.Models.ViewModels;
 using Microsoft.Extensions.Logging.Abstractions;
+using LibraryWeb.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
