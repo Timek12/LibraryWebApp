@@ -1,6 +1,7 @@
 using LibraryWeb.DataAccess.Repository.IRepository;
 using LibraryWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace LibraryWeb.Areas.Customer.Controllers
